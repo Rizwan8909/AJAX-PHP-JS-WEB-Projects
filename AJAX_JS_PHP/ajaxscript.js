@@ -28,6 +28,8 @@ function showStudent(){
                                     <td>`+x[i].name+`</td>
                                     <td>`+x[i].class+`</td>
                                     <td>`+x[i].marks+`</td>
+                                    <td><button type="button" class="btn btn-warning btn-edit" data-stu_id=`+x[i].ID+`>Edit</button></td>
+                                    <td><button type="button" class="btn btn-danger btn-delete" data-stu_id=`+x[i].ID+`>Delete</button></td>
                                   </tr>`;
             }
            
@@ -35,6 +37,7 @@ function showStudent(){
         else{
             console.log("Something went wrong");
         }
+        deleteStudent();
     }
 
     xhr.send();
@@ -85,6 +88,7 @@ function addStudent(e){
         else{
             console.log("Some problem occured");
         }
+        
     }
 
     // Creating object of Data
@@ -95,4 +99,48 @@ function addStudent(e){
 
     xhr.send(data);
    
+}
+
+// AJAX call for deletion of student
+function deleteStudent(){
+    x = document.getElementsByClassName('btn-delete');
+
+    // Actual deleting button accesses
+    for (let i = 0; i < x.length; i++) {
+        
+        x[i].addEventListener("click", function(){
+            
+            stu_id = x[i].getAttribute("data-stu_id");
+            console.log("Delted", stu_id);
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "delete.php", true);
+
+            xhr.setRequestHeader("Contenct-Type", "application/json")
+
+            xhr.onload = ()=>{
+
+                if(xhr.status === 200){
+                    let alert = document.getElementById("alertTable");
+                    alert.innerHTML =`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>`+xhr.responseText+`
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>`;
+                    showStudent();
+                }
+                else{
+                    console.log("Something went wrong");
+                }
+            }
+
+            $mydata = {sid: stu_id};
+            $data = JSON.stringify($mydata);
+
+            xhr.send($data);
+            // Dont forget to call this function in showStudent function
+        })
+        
+    }
 }
