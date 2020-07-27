@@ -2,6 +2,7 @@
 let tbody = document.getElementById('tbody');
 
 function showStudent(){
+    tbody.innerHTML="";
     const xhr = new XMLHttpRequest();
 
     // Initializing the xhr object
@@ -79,6 +80,7 @@ function addStudent(e){
             
             // Reseting the form
             document.getElementById('student_form').reset();
+            showStudent();
         }
         else{
             console.log("Some problem occured");
@@ -92,4 +94,5 @@ function addStudent(e){
     let data = JSON.stringify(mydata);
 
     xhr.send(data);
+   
 }

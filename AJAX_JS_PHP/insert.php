@@ -12,7 +12,7 @@
 
     // Insertion Process
     if(!empty($name) && !empty($class) && !empty($marks)){
-        $sql = "INSERT INTO `students` (`name`, `class`, `marks`) VALUES ('$name', '$class', '$marks')";
+        $sql = "INSERT INTO `student` (`name`, `class`, `marks`) VALUES ('$name', '$class', '$marks')";
         $result = $conn->query($sql);
 
         if($result){
