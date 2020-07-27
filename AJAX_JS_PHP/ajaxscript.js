@@ -1,3 +1,50 @@
+// Ajax Request for retrieving the data
+let tbody = document.getElementById('tbody');
+
+function showStudent(){
+    const xhr = new XMLHttpRequest();
+
+    // Initializing the xhr object
+    xhr.open('GET', 'retrieve.php', true);
+
+    // Converting json to js object
+    xhr.responseType = "json";
+
+    // Handling the response
+    xhr.onload = () =>{
+        if(xhr.status == 200){
+            // Success Response
+            if(xhr.response){
+                x= xhr.response     //To use responseType we have to convert responseText to response
+            }
+            else{
+                x = "";
+            }
+
+            for(i=0; i<x.length; i++){
+                tbody.innerHTML += `<tr>
+                                    <td>`+x[i].ID+`</td>
+                                    <td>`+x[i].name+`</td>
+                                    <td>`+x[i].class+`</td>
+                                    <td>`+x[i].marks+`</td>
+                                  </tr>`;
+            }
+           
+        }
+        else{
+            console.log("Something went wrong");
+        }
+    }
+
+    xhr.send();
+}
+
+// Calling showStudent
+showStudent();
+
+
+
+// Ajax Request for inseting the data
 let submit = document.getElementById('id_submit');
 submit.addEventListener('click', addStudent);
 
@@ -9,12 +56,11 @@ function addStudent(e){
     let mrks = document.getElementById('id_marks').value;
 
 
-    let xhr = new XMLHttpRequest(); // Initalizing xhr object
+    const xhr = new XMLHttpRequest(); // Initalizing xhr object
 
     xhr.open('POST', 'insert.php', true); // Setting Forms action=insert.php and method=post
 
-
-    // Response Header
+    // Response Header (Only need for POSt request)
     xhr.setRequestHeader("Content-Type", "application/json");
 
     // Handling the response
