@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -15,12 +16,12 @@
 <body class="bg-light">
 
     <div class="container">
-        <div class="card mx-auto my-5 border-0 shadow" style="width: 25rem;">
+        <div class="card mx-auto my-5 border-0 shadow" id="box" style="width: 25rem;">
             <div class="card-header">
                 <h5>Login</h5>
             </div>
             <div class="card-body p-4">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" novalidate>
                     <div class="form-row my-3">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -40,7 +41,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Login</button>
+                    <button class="btn btn-primary" id="login" name="login" type="submit">Login</button>
                     <div class="error"></div>
                 </form>
             </div>
@@ -71,6 +72,35 @@
                 });
             }, false);
         })();
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('#login').click(function(){
+                var userName = $('#username').val;
+                var pass = $('#password').val;
+
+                if($.trim(userName).length > 0 && $.trim(pass).length > 0){
+                    $.ajax({
+                        url: "login.php",
+                        method: "POST",
+                        data: {username: userName, password: pass},
+                        cache: false,
+                        beforeSend: function(){
+                            $('#login').val('Connecting.....');
+                        },
+                        success: function(data){
+                            if(data){
+                                $('body').load('home.php').hide().fadeIn(1500);
+                            }
+                        }                        
+                    })
+                }
+                else{
+
+                }
+            });
+        });
     </script>
 
 </body>
