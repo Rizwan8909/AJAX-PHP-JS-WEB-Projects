@@ -22,8 +22,8 @@
 
 <body class="bg-light">
 
-    <div class="container">
-        <div class="card mx-auto my-5 border-0 shadow" id="box" style="width: 25rem;">
+    <div class="container" style="width: 25rem;">
+        <div class="card mx-auto my-5 border-0 shadow" id="box">
             <div class="card-header">
                 <h5>Login</h5>
             </div>
