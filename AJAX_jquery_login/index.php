@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(isset($_SESSION['username'])){
+        header("location:home.php");
+    }
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -5,12 +12,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <title>AJAX LOGIN!</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-light">
@@ -35,14 +42,14 @@
 
                     <div class="form-row my-3">
                         <label for="password">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="password" name="password" required>
                         <div class="invalid-feedback">
                             Please fill the password field.
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" id="login" name="login" type="submit">Login</button>
-                    <div class="error"></div>
+                    <input type="button" class="btn btn-primary" id="login" name="login" value="Login">
+                    <div id="error"></div>
                 </form>
             </div>
         </div>
@@ -50,10 +57,11 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script>
+    <!-- <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';
@@ -72,7 +80,7 @@
                 });
             }, false);
         })();
-    </script>
+    </script> -->
 
     <script>
         $(document).ready(function(){
@@ -93,11 +101,21 @@
                             if(data){
                                 $('body').load('home.php').hide().fadeIn(1500);
                             }
+                            else{
+                                var options = {
+                                    distance: '40',
+                                    direction: 'left',
+                                    times: '3',
+                                }
+                                $('#box').effect("shake", options, 800)
+                                $('#login').val("Login");
+                                $('#error').html('<span class="text-danger">Invaled username or password</span>')
+                            }
                         }                        
-                    })
+                    });
                 }
                 else{
-
+                    return false;
                 }
             });
         });
