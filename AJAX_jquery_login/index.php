@@ -85,9 +85,8 @@
     <script>
         $(document).ready(function(){
             $('#login').click(function(){
-                var userName = $('#username').val;
-                var pass = $('#password').val;
-
+                var userName = $('#username').val();
+                var pass = $('#password').val();
                 if($.trim(userName).length > 0 && $.trim(pass).length > 0){
                     $.ajax({
                         url: "login.php",
@@ -104,7 +103,7 @@
                             else{
                                 var options = {
                                     distance: '40',
-                                    direction: 'left',
+                                    direction: 'center',
                                     times: '3',
                                 }
                                 $('#box').effect("shake", options, 800)
