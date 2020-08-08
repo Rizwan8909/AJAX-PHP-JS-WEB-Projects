@@ -24,7 +24,7 @@
             <div class="card-body signin-form">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="username" class="ml-2 mb-0">
+                        <label for="user_name" class="ml-2 mb-0">
                             <h6>Username</h6>
                         </label>
                         <input type="text" class="form-control round-border border-0 bg-light" id="user_name" name="user_name" placeholder="Enter your username" aria-describedby="emailHelp" required>
@@ -65,10 +65,10 @@
                             <option value="">Female</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary round-border my-2" id="sign_up" name="sign_in">Sign Up</button>
+                    <button type="submit" class="btn btn-primary round-border my-2" id="sign_up" name="sign_up">Sign Up</button>
                 </form>
 
-                <!-- <?php //include "signin_user.php";
+                <!-- <?php //include "signup_user.php";
                         ?> -->
             </div>
         </div>
