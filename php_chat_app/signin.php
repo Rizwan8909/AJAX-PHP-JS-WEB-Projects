@@ -18,15 +18,17 @@
 
             <div class="card-header">
                 <h5>Sign In</h5>
-                <small>don't have an account? <a href="">register</a></small>
+                <small>don't have an account? <a href="signup.php">sign up</a></small>
             </div>
 
             <div class="card-body signin-form">
                 <form method="POST">
                     <div class="form-group">
+                        <label for="email" class="ml-2 mb-0"><h6>Email</h6></label>
                         <input type="text" class="form-control round-border border-0 bg-light" id="email" name="email" placeholder="Enter your Email" aria-describedby="emailHelp" required>
                     </div>
                     <div class="form-group">
+                        <label for="email" class="ml-2 mb-0"><h6>Password</h6></label>
                         <input type="password" class="form-control round-border border-0 bg-light" id="pass" name="pass" placeholder="Enter your Password" required>
                     </div>
                    
