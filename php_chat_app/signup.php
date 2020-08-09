@@ -14,6 +14,7 @@
 
 <body class="body-class">
     <div class="container" style="width: 28rem;">
+
         <div class="card round-border border-0 shadow-lg my-5">
 
             <div class="card-header">
@@ -22,7 +23,7 @@
             </div>
 
             <div class="card-body signin-form">
-                <form method="POST">
+                <form method="POST" action="signup.php">
                     <div class="form-group">
                         <label for="user_name" class="ml-2 mb-0">
                             <h6>Username</h6>
@@ -49,10 +50,10 @@
                             <h6>Country</h6>
                         </label>
                         <select name="user_country" id="user_country" class="form-control round-border border-0 bg-light">
-                            <option value="">Pakistan</option>
-                            <option value="">India</option>
-                            <option value="">Bangladesh</option>
-                            <option value="">Afghanistan</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="India">India</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Afghanistan">Afghanistan</option>
                         </select>
                     </div>
 
@@ -61,17 +62,17 @@
                             <h6>Gender</h6>
                         </label>
                         <select name="user_gender" id="user_gender" class="form-control round-border border-0 bg-light">
-                            <option value="">Male</option>
-                            <option value="">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary round-border my-2" id="sign_up" name="sign_up">Sign Up</button>
                 </form>
-
-                <!-- <?php //include "signup_user.php";
-                        ?> -->
+                <?php include "user_signup.php";?>
+               
             </div>
-        </div>
+        </div> <!-- Main card ends here -->
+
     </div>
 
     <!-- Optional JavaScript -->
