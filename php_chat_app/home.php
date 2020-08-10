@@ -18,7 +18,7 @@
         <a class="navbar-brand" href="#">Chat</a>
     </nav>
 
-    <div class="container-fluid">
+    <div id="left-chat">
         <div class="row">
 
             <!-- Left side -->
@@ -50,25 +50,45 @@
                 <div class="card rounded-0 left-chat">
                     <div class="card-body">
 
-                    <ul class="list-group">
-                        <li class="list-group-item border-0"><h6 class="text-muted">FRIENDS</h6></li>
-                        <a href="" class="list-group-item list-group-item-action border-0 round-border">Dapibus ac facilisis in</a>
-                        <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
-                        <li class="list-group-item list-group-item-action border-0 round-border">Porta ac consectetur ac</li>
-                        <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li>
-                        <!-- <?php //include "include/get_user_data.php"?> -->
-                    </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item border-0">
+                                <h6 class="text-muted">FRIENDS</h6>
+                            </li>
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.jpg" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rizwan Ahmed</p>
+                                        <small >Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+                            <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
+                            <li class="list-group-item list-group-item-action border-0 round-border">Porta ac consectetur ac</li>
+                            <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li>
+                            <!-- <?php //include "include/get_user_data.php"
+                                    ?> -->
+                        </ul>
 
                     </div>
 
 
                 </div>
             </div>
-
             <!-- Left side ends -->
 
-            <div class="right-chat col-md-9">
-                df
+            <!-- Right start here -->
+            <div class="col-md-9">
+                <div class="">
+                    <div class="card rounded-0 left-chat">
+                        <div class="card-body">
+
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
