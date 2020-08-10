@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
@@ -17,8 +17,42 @@
     <nav class="navbar body-class navbar-dark">
         <a class="navbar-brand" href="#">Chat</a>
     </nav>
-    <div class="container-fluid">
 
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Left side -->
+            <div class="left-chat col-md-3">
+
+                <div class="card rounded-0">
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <img src="images/default-user.jpg" alt="" style="width: 40px; height:40px">
+                                <h5 class="my-2">Chats</h5>
+                            </div>
+
+                            <div>
+                                <a href="include/find_friends.php">
+                                    <button class="btn btn-outline-secondary border-0 round-border" data-toggle="tooltip" data-placement="bottom" title="Find new friends" type="button" id="find_friends">
+                                        <i class="fas fa-user-friends"></i>
+                                    </button>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Left side ends -->
+
+            <div class="right-chat col-md-9">
+                df
+            </div>
+        </div>
 
 
     </div>
