@@ -22,7 +22,7 @@
         <div class="row">
 
             <!-- Left side -->
-            <div class="left-chat col-md-3">
+            <div class="col-md-3">
 
                 <div class="card rounded-0">
                     <div class="card-body">
@@ -30,7 +30,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <img src="images/default-user.jpg" alt="" style="width: 40px; height:40px">
-                                <h5 class="my-2">Chats</h5>
+                                <h4 class="my-2">Chats</h4>
                             </div>
 
                             <div>
@@ -46,7 +46,25 @@
 
                     </div>
                 </div>
+
+                <div class="card rounded-0 left-chat">
+                    <div class="card-body">
+
+                    <ul class="list-group">
+                        <li class="list-group-item border-0"><h6 class="text-muted">FRIENDS</h6></li>
+                        <a href="" class="list-group-item list-group-item-action border-0 round-border">Dapibus ac facilisis in</a>
+                        <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
+                        <li class="list-group-item list-group-item-action border-0 round-border">Porta ac consectetur ac</li>
+                        <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li>
+                        <!-- <?php //include "include/get_user_data.php"?> -->
+                    </ul>
+
+                    </div>
+
+
+                </div>
             </div>
+
             <!-- Left side ends -->
 
             <div class="right-chat col-md-9">
