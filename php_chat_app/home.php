@@ -12,7 +12,7 @@
     <title>Chat</title>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
     <!-- As a link -->
     <nav class="navbar body-class navbar-dark">
         <a class="navbar-brand" href="#">Chat</a>
@@ -29,7 +29,7 @@
 
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
-                                <img src="images/default-user.jpg" alt="" style="width: 40px; height:40px">
+                                <img src="images/default-user.png" alt="" style="width: 40px; height:40px">
                                 <h4 class="my-2">Chats</h4>
                             </div>
 
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="card rounded-0 left-chat">
-                    <div class="card-body">
+                    <div class="card-body" style="overflow:scroll; height: 650px;">
 
                         <ul class="list-group">
                             <li class="list-group-item border-0">
@@ -56,17 +56,95 @@
                             </li>
                             <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
                                 <div class="d-flex my-2">
-                                    <img src="images/default-user.jpg" alt="" style="width: 50px; height:50px">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
                                     <div class="my-3">
                                         <p class="my-1" style="line-height: 0;">Rizwan Ahmed</p>
-                                        <small >Online</small>
+                                        <small class="text-success">Online</small>
                                     </div>
                                 </div>
 
                             </a>
-                            <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
+
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Kainat Ahmed</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <div class="d-flex my-2">
+                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                    <div class="my-3">
+                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+
+                            </a>
+                            <!-- <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
                             <li class="list-group-item list-group-item-action border-0 round-border">Porta ac consectetur ac</li>
-                            <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li>
+                            <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li> -->
                             <!-- <?php //include "include/get_user_data.php"
                                     ?> -->
                         </ul>
@@ -80,14 +158,12 @@
 
             <!-- Right start here -->
             <div class="col-md-9">
-                <div class="">
-                    <div class="card rounded-0 left-chat">
-                        <div class="card-body">
-
-
-
-                        </div>
+                <div class="left-chat">
+                    <div class="d-flex my-2">
+                        <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                        <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
                     </div>
+                    <hr>
                 </div>
             </div>
         </div>
