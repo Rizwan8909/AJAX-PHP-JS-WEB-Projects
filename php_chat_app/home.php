@@ -1,3 +1,7 @@
+<?php
+include "include/db_connection.php";
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -27,10 +31,18 @@
                 <div class="card rounded-0">
                     <div class="card-body">
 
+                        <?php
+                            // Getting the data of user who is logged in
+                            $current_user = $_SESSION['user_email'];
+                            $get_curr_user = "SELECT * FROM `users` WHERE `user_email`='$current_user'";
+                            $run_curr_user = mysqli_query($conn, $get_curr_user);
+                            $row = mysqli_fetch_assoc($run_curr_user);
+                            $current_username = $row['user_name'];
+                        ?>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <img src="images/default-user.png" alt="" style="width: 40px; height:40px">
-                                <h4 class="my-2">Chats</h4>
+                                <h4 class="my-2"><?php echo $current_username?></h4>
                             </div>
 
                             <div>
@@ -158,6 +170,7 @@
 
             <!-- Right start here -->
             <div class="col-md-9">
+
                 <div class="left-chat">
                     <div class="d-flex my-2">
                         <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
