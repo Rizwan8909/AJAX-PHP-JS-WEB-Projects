@@ -101,19 +101,17 @@ if (!isset($_SESSION['user_email'])) {
                                         </div>
                                     </div>
                                 </a>
-
-                                <!-- Remaining bracket of while -->
+   
                             <?php
+                            //  <!-- Remaining bracket of while -->
                             }
                             ?>
-
 
                             <!-- <?php //include "include/get_user_data.php"
                                     ?> -->
                         </ul>
 
                     </div>
-
 
                 </div>
             </div>
@@ -123,39 +121,85 @@ if (!isset($_SESSION['user_email'])) {
             <div class="col-md-9">
 
                 <?php
-                    // Getting userdetails in header
-                    if (isset($_GET['fuser_name'])) {
-                        $fuser_name = $_GET['fuser_name'];
-                    }
-                    else{
-                        $fuser_name = "No one is selected";
-                    }
+                // Getting userdetails in header
+                if (isset($_GET['fuser_name'])) {
+                    $fuser_name = $_GET['fuser_name'];
+                } else {
+                    $fuser_name = "No one is selected";
+                }
 
-                    // Displaying total messages in chat
-                    $total_msgs = "SELECT * FROM `user_chat` WHERE (`sender_username` = '$current_user' AND `reciever_username` = '$fuser_name') OR (`reciever_username` = '$current_user' AND `sender_username` = '$fuser_name')";
-                    
-                    $run_msgs = mysqli_query($conn, $total_msgs);
-                    if($run_msgs){
-                        $total = mysqli_num_rows($run_msgs);
-                    }
-                   
+                // Displaying total messages in chat
+                $total_msgs = "SELECT * FROM `user_chat` WHERE (`sender_username` = '$current_username' AND `reciever_username` = '$fuser_name') OR (`reciever_username` = '$current_username' AND `sender_username` = '$fuser_name')";
+
+                $run_msgs = mysqli_query($conn, $total_msgs);
+                if ($run_msgs) {
+                    $total = mysqli_num_rows($run_msgs);
+                }
+
                 ?>
 
                 <div class="right-chat">
                     <div class="d-flex justify-content-between" id="right header">
                         <div class="d-flex my-2">
                             <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                            <div  class="my-1 ml-2">
+                            <div class="my-1 ml-2">
                                 <h5> <?php echo $fuser_name; ?> </h5>
-                                <small> <?php echo $total;?> messages</small>
+                                <small> <?php echo $total; ?> messages</small>
                             </div>
                         </div>
                         <a href="logout.php" class="btn btn-danger round-border my-3 mr-3" name="logout" style="height: 40px;">Logout</a>
                     </div>
-
                     <hr>
+
+                    <!-- Actual Chat -->
                     <div id="right_chat" style="overflow:scroll; height: 600px;">
-                        Chat Area
+                        <?php
+
+                        // Marking as read
+                        $update_msg_status = "UPDATE `user_chat` SET `msg_status` = 'Read' WHERE (`reciever_username` = '$current_username' AND `sender_username` = '$fuser_name')";
+                        $run_msg_status = mysqli_query($conn, $update_msg_status);
+
+                        // Displaying msgs
+                        $get_msgs = "SELECT * FROM `user_chat` WHERE (`sender_username` = '$current_username ' AND `reciever_username` = '$fuser_name') OR (`reciever_username` = '$current_username' AND `sender_username` = '$fuser_name')";
+                        $run_msgs = mysqli_query($conn, $get_msgs);
+
+
+                        while ($row = mysqli_fetch_assoc($run_msgs)) {
+                            $sender_username = $row['sender_username'];
+                            $reciever_username = $row['reciever_username'];
+                            $msg_content = $row['msg_content'];
+
+                            // Bracket is ending down
+                        ?>
+
+                            <!-- Chat messages -->
+                            <ul style="padding-left:0">
+                            <?php
+                                    // Sender messages
+                                    if ($current_username == $sender_username and $fuser_name == $reciever_username) {
+                                        echo ' <li style="list-style: none;">
+                                                    <div class="card round-border body-class text-white border-0" style="width: 500px; margin-left: 500px">
+                                                        <div class="card-body p-2 ml-2">
+                                                            '.$msg_content.'
+                                                        </div>
+                                                    </div>
+                                                </li>';
+                                    }
+
+                                    if($current_username == $reciever_username and $fuser_name == $sender_username){
+                                        echo '<li style="list-style: none;">
+                                                <div class="card round-border bg-light border-0" style="width: 500px;">
+                                                    <div class="card-body p-2 ml-2">
+                                                        '.$msg_content.'
+                                                    </div>
+                                                </div>
+                                            </li>';
+                                    }
+
+                                } //Remaining bracket of while to show messages
+                            ?>
+     
+                        </ul>
                     </div>
 
 
