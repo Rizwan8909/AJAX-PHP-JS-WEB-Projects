@@ -32,17 +32,17 @@ session_start();
                     <div class="card-body">
 
                         <?php
-                            // Getting the data of user who is logged in
-                            $current_user = $_SESSION['user_email'];
-                            $get_curr_user = "SELECT * FROM `users` WHERE `user_email`='$current_user'";
-                            $run_curr_user = mysqli_query($conn, $get_curr_user);
-                            $row = mysqli_fetch_assoc($run_curr_user);
-                            $current_username = $row['user_name'];
+                        // Getting the data of user who is logged in
+                        $current_user = $_SESSION['user_email'];
+                        $get_curr_user = "SELECT * FROM `users` WHERE `user_email`='$current_user'";
+                        $run_curr_user = mysqli_query($conn, $get_curr_user);
+                        $row = mysqli_fetch_assoc($run_curr_user);
+                        $current_username = $row['user_name'];
                         ?>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <img src="images/default-user.png" alt="" style="width: 40px; height:40px">
-                                <h4 class="my-2"><?php echo $current_username?></h4>
+                                <h4 class="my-2"><?php echo $current_username ?></h4>
                             </div>
 
                             <div>
@@ -62,101 +62,39 @@ session_start();
                 <div class="card rounded-0 left-chat">
                     <div class="card-body" style="overflow:scroll; height: 650px;">
 
+
                         <ul class="list-group">
                             <li class="list-group-item border-0">
                                 <h6 class="text-muted">FRIENDS</h6>
                             </li>
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rizwan Ahmed</p>
-                                        <small class="text-success">Online</small>
+
+                            <?php
+                            // Getting friends to chat
+                            $get_users = "SELECT * FROM `users`";
+                            $run_users = mysqli_query($conn, $get_users);
+
+                            while ($row = mysqli_fetch_assoc($run_users)) {
+                                $users_name = $row['user_name'];
+                                $users_status = $row['login'];
+
+                            ?>
+                                <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                    <div class="d-flex my-2">
+                                        <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                        <div class="my-3">
+                                            <p class="my-1" style="line-height: 0;"><?php echo $users_name ?></p>
+                                            <small class="text-success"><?php echo $users_status ?></small>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </a>
+                                </a>
+
+                                <!-- Remaining bracket of while -->
+                            <?php
+                            }
+                            ?>
 
 
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Kainat Ahmed</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-
-                            <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
-                                <div class="d-flex my-2">
-                                    <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                    <div class="my-3">
-                                        <p class="my-1" style="line-height: 0;">Rehan Arain</p>
-                                        <small class="text-success">Online</small>
-                                    </div>
-                                </div>
-
-                            </a>
-                            <!-- <li class="list-group-item list-group-item-action border-0 round-border">Morbi leo risus</li>
-                            <li class="list-group-item list-group-item-action border-0 round-border">Porta ac consectetur ac</li>
-                            <li class="list-group-item list-group-item-action border-0 round-border">Vestibulum at eros</li> -->
                             <!-- <?php //include "include/get_user_data.php"
                                     ?> -->
                         </ul>
@@ -171,10 +109,13 @@ session_start();
             <!-- Right start here -->
             <div class="col-md-9">
 
-                <div class="left-chat">
-                    <div class="d-flex my-2">
-                        <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                        <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
+                <div class="right-chat">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex my-2">
+                            <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                            <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
+                        </div>
+                        <a href="logout.php" class="btn btn-danger">Logout</a>
                     </div>
                     <hr>
                 </div>
