@@ -81,22 +81,22 @@ if (!isset($_SESSION['user_email'])) {
                                 $users_status = $row['login'];
 
                             ?>
-                                
+
                                 <!-- List of friends using while loop -->
                                 <a href="home.php?fuser_name=<?php echo $users_name ?>" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
                                     <div class="d-flex my-2">
                                         <img src="images/default-user.png" alt="" class="my-2" style="width: 50px; height:50px">
-                                       
+
                                         <div class="my-4 d-flex">
                                             <h6><?php echo $users_name ?></h6>
 
                                             <?php
-                                                // Login status
-                                                if ($users_status == 'Online') {
-                                                    echo '<small class="text-success ml-2">' . $users_status . '</small>';
-                                                } else {
-                                                    echo '<small class="text-black-50 ml-2">' . $users_status . '</small>';
-                                                }
+                                            // Login status
+                                            if ($users_status == 'Online') {
+                                                echo '<small class="text-success ml-2">' . $users_status . '</small>';
+                                            } else {
+                                                echo '<small class="text-black-50 ml-2">' . $users_status . '</small>';
+                                            }
                                             ?>
                                         </div>
                                     </div>
@@ -123,17 +123,32 @@ if (!isset($_SESSION['user_email'])) {
             <div class="col-md-9">
 
                 <?php
-                // Getting userdetails in header
-                if (isset($_GET['fuser_name'])) {
-                    $fuser_name = $_GET['fuser_name'];
-                }
+                    // Getting userdetails in header
+                    if (isset($_GET['fuser_name'])) {
+                        $fuser_name = $_GET['fuser_name'];
+                    }
+                    else{
+                        $fuser_name = "No one is selected";
+                    }
+
+                    // Displaying total messages in chat
+                    $total_msgs = "SELECT * FROM `user_chat` WHERE (`sender_username` = '$current_user' AND `reciever_username` = '$fuser_name') OR (`reciever_username` = '$current_user' AND `sender_username` = '$fuser_name')";
+                    
+                    $run_msgs = mysqli_query($conn, $total_msgs);
+                    if($run_msgs){
+                        $total = mysqli_num_rows($run_msgs);
+                    }
+                   
                 ?>
 
                 <div class="right-chat">
                     <div class="d-flex justify-content-between" id="right header">
                         <div class="d-flex my-2">
                             <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                            <h5 class="my-3 ml-2"><?php echo $fuser_name; ?></h5>
+                            <div  class="my-1 ml-2">
+                                <h5> <?php echo $fuser_name; ?> </h5>
+                                <small> <?php echo $total;?> messages</small>
+                            </div>
                         </div>
                         <a href="logout.php" class="btn btn-danger round-border my-3 mr-3" name="logout" style="height: 40px;">Logout</a>
                     </div>
