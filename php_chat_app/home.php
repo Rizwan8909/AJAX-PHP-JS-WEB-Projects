@@ -81,7 +81,7 @@ if(!isset($_SESSION['user_email'])){
                                 $users_status = $row['login'];
 
                             ?>
-                                <a href="" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
+                                <a href="home.php?fuser_name=<?php echo $users_name?>" class="list-group-item list-group-item-action border-0 round-border p-0 pl-3">
                                     <div class="d-flex my-2">
                                         <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
                                         <div class="my-3">
@@ -120,17 +120,28 @@ if(!isset($_SESSION['user_email'])){
             <!-- Right start here -->
             <div class="col-md-9">
 
+            <?php
+                // Getting userdetails in header
+                if(isset($_GET['fuser_name'])){
+                    $fuser_name = $_GET['fuser_name'];
+                }   
+            ?>
+
                 <div class="right-chat">
-                        <div>
+                        <div class="d-flex justify-content-between" id="right header">
                             <div class="d-flex my-2">
                                 <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                                <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
+                                <h5 class="my-3 ml-2"><?php echo $fuser_name;?></h5>
                             </div>
-                            <a href="logout.php" class="btn btn-danger round-border" name="logout">Logout</a>
+                            <a href="logout.php" class="btn btn-danger round-border my-3" name="logout" style="height: 40px;">Logout</a>
                         </div>
 
+                        <hr>
+                        <div id="right_chat" style="overflow:scroll; height: 600px;">
+                            dfad
+                        </div>
                   
-                    <hr>
+                 
                 </div>
             </div>
         </div>
