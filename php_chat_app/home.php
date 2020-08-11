@@ -1,6 +1,9 @@
 <?php
 include "include/db_connection.php";
 session_start();
+if(!isset($_SESSION['user_email'])){
+    header("Location:signin.php");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -83,7 +86,16 @@ session_start();
                                         <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
                                         <div class="my-3">
                                             <p class="my-1" style="line-height: 0;"><?php echo $users_name ?></p>
-                                            <small class="text-success"><?php echo $users_status ?></small>
+                                            
+                                             <?php
+                                                // Login status
+                                                if($users_status == 'Online'){
+                                                    echo '<small class="text-success">'.$users_status.'</small>';
+                                                }
+                                                else{
+                                                    echo '<small class="text-black-50">'.$users_status.'</small>';
+                                                }
+                                             ?>
                                         </div>
                                     </div>
 
@@ -91,12 +103,11 @@ session_start();
 
                                 <!-- Remaining bracket of while -->
                             <?php
-                            }
+                                }
                             ?>
 
 
-                            <!-- <?php //include "include/get_user_data.php"
-                                    ?> -->
+                            <!-- <?php //include "include/get_user_data.php"?> -->
                         </ul>
 
                     </div>
@@ -110,13 +121,15 @@ session_start();
             <div class="col-md-9">
 
                 <div class="right-chat">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex my-2">
-                            <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
-                            <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
+                        <div>
+                            <div class="d-flex my-2">
+                                <img src="images/default-user.png" alt="" style="width: 50px; height:50px">
+                                <h5 class="my-3 ml-2">Rizwan Ahmed</h5>
+                            </div>
+                            <a href="logout.php" class="btn btn-danger round-border" name="logout">Logout</a>
                         </div>
-                        <a href="logout.php" class="btn btn-danger">Logout</a>
-                    </div>
+
+                  
                     <hr>
                 </div>
             </div>

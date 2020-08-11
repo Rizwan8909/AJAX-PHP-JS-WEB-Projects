@@ -1,3 +1,8 @@
+<?php
+if(isset($_SESSION['user_email'])){
+    header("Location:home.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 
