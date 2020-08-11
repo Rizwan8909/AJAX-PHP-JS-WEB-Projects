@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2020 at 05:42 AM
+-- Generation Time: Aug 12, 2020 at 11:19 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -46,9 +46,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_country`, `user_gender`, `user_profile`, `time`, `forgotten_anwer`, `login`) VALUES
 (1, 'Rizwan', 'rizwan@this.com', '123', 'Pakistan', 'Male', '1', '2020-08-10 01:37:04', '', 'Online'),
-(2, 'Rehan Ahmed', 'rehan@this.com', '123', 'Pakistan', 'Male', '1', '2020-08-10 01:48:23', '', ''),
-(3, 'Kainat', 'kainat@this.com', '123', 'Pakistan', 'Female', '1', '2020-08-10 01:50:05', '', ''),
-(4, 'Shabbir Ahmed', 'shabbir@this.com', '123', 'Pakistan', 'Male', '2', '2020-08-10 01:51:08', '', '');
+(2, 'Rehan Ahmed', 'rehan@this.com', '123', 'Pakistan', 'Male', '1', '2020-08-10 01:48:23', '', 'Offline'),
+(3, 'Kainat', 'kainat@this.com', '123', 'Pakistan', 'Female', '1', '2020-08-10 01:50:05', '', 'Offline'),
+(4, 'Shabbir Ahmed', 'shabbir@this.com', '123', 'Pakistan', 'Male', '2', '2020-08-10 01:51:08', '', 'Offline'),
+(5, 'Razia', 'razia@this.com', '123', 'Pakistan', 'Female', '1', '2020-08-12 00:43:10', '', 'Offline');
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,14 @@ CREATE TABLE `user_chat` (
   `msg_status` text NOT NULL,
   `msg_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_chat`
+--
+
+INSERT INTO `user_chat` (`msg_id`, `sender_username`, `reciever_username`, `msg_content`, `msg_status`, `msg_time`) VALUES
+(1, 'Rehan Ahmed', 'Rizwan', 'Hi', 'Read', '2020-08-12 08:10:44'),
+(2, 'Rizwan', 'Rehan Ahmed', 'Bye', 'Read', '2020-08-12 08:19:39');
 
 --
 -- Indexes for dumped tables
@@ -89,13 +98,13 @@ ALTER TABLE `user_chat`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
 --
 ALTER TABLE `user_chat`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
