@@ -177,6 +177,7 @@ if (!isset($_SESSION['user_email'])) {
                             <?php
                                     // Sender messages
                                     if ($current_username == $sender_username and $fuser_name == $reciever_username) {
+                                        echo '<small class="text-muted" style="margin-left:960px;">You</small>';
                                         echo ' <li class="my-1" style="list-style: none;">
                                                     <div class="card round-border body-class text-white border-0" style="width: 500px; margin-left: 500px">
                                                         <div class="card-body p-2 ml-2">
@@ -187,6 +188,7 @@ if (!isset($_SESSION['user_email'])) {
                                     }
 
                                     if($current_username == $reciever_username and $fuser_name == $sender_username){
+                                        echo '<small class="ml-3 text-muted">'.$fuser_name.'</small>';
                                         echo '<li class="my-1" style="list-style: none;">
                                                 <div class="card round-border bg-light border-0" style="width: 500px;">
                                                     <div class="card-body p-2 ml-2">
@@ -219,6 +221,8 @@ if (!isset($_SESSION['user_email'])) {
                             (`sender_username`, `reciever_username`, `msg_content`, `msg_status`, `msg_time`)VALUES 
                             ('$current_username', '$fuser_name', '$msg', 'unread', current_timestamp())";
                             $run_msg = mysqli_query($conn, $send_msg);
+                            
+                            echo '<script>window.open("home.php?fuser_name='.$fuser_name.'", "_self");</script>';
                         }
                     ?>
 
@@ -226,7 +230,6 @@ if (!isset($_SESSION['user_email'])) {
                 </div>
             </div>
         </div>
-
 
     </div>
 
