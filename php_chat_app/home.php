@@ -177,7 +177,7 @@ if (!isset($_SESSION['user_email'])) {
                             <?php
                                     // Sender messages
                                     if ($current_username == $sender_username and $fuser_name == $reciever_username) {
-                                        echo ' <li style="list-style: none;">
+                                        echo ' <li class="my-1" style="list-style: none;">
                                                     <div class="card round-border body-class text-white border-0" style="width: 500px; margin-left: 500px">
                                                         <div class="card-body p-2 ml-2">
                                                             '.$msg_content.'
@@ -187,7 +187,7 @@ if (!isset($_SESSION['user_email'])) {
                                     }
 
                                     if($current_username == $reciever_username and $fuser_name == $sender_username){
-                                        echo '<li style="list-style: none;">
+                                        echo '<li class="my-1" style="list-style: none;">
                                                 <div class="card round-border bg-light border-0" style="width: 500px;">
                                                     <div class="card-body p-2 ml-2">
                                                         '.$msg_content.'
@@ -211,6 +211,16 @@ if (!isset($_SESSION['user_email'])) {
                             </div>
                         </form>
                     </div>
+
+                    <?php
+                        if(isset($_POST['submit'])){
+                            $msg = htmlentities(mysqli_real_escape_string($conn, $_POST['message']));
+                            $send_msg = "INSERT INTO `user_chat` 
+                            (`sender_username`, `reciever_username`, `msg_content`, `msg_status`, `msg_time`)VALUES 
+                            ('$current_username', '$fuser_name', '$msg', 'unread', current_timestamp())";
+                            $run_msg = mysqli_query($conn, $send_msg);
+                        }
+                    ?>
 
 
                 </div>
