@@ -152,7 +152,7 @@ if (!isset($_SESSION['user_email'])) {
                     <hr>
 
                     <!-- Actual Chat -->
-                    <div id="right_chat" style="overflow:scroll; height: 600px;">
+                    <div id="right_chat" style="overflow:scroll; height: 570px;">
                         <?php
 
                         // Marking as read
@@ -200,6 +200,16 @@ if (!isset($_SESSION['user_email'])) {
                             ?>
      
                         </ul>
+                    </div>
+
+                    <!-- Message box -->
+                    <div id="message">
+                        <form method="POST">
+                            <div class="d-flex my-2">
+                                <input type="text" class="form-control round-border border-0" id="message" name="message" placeholder="Type you message..." style="background-color: #F0F0F0;">
+                                <button name="submit" class="btn body-class round-border text-light"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </form>
                     </div>
 
 
