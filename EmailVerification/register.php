@@ -1,3 +1,6 @@
+<?php
+    include "db_connection.php";
+?>
 <!doctype html>
 <html lang="en">
 
@@ -13,8 +16,8 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="container" style="width: 27rem;">
+    <div class="container-fluid mx-auto">
+        <div class="container my-5 " style="width: 27rem;">
 
             <h4 class="text-center">Create A new Account</h4>
             <p class="text-center">Create your free account now!</p>
@@ -22,33 +25,33 @@
             <button class="btn btn-primary rounded-0 btn-block font-weight-bold">Login with Facebook</button>
             <hr>
 
-            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
+            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control rounded-0" placeholder="Your Email" name="email" aria-label="email" aria-describedby="basic-addon1">
+                    <input type="email" class="form-control rounded-0" placeholder="Your Email" name="email" aria-label="email" aria-describedby="basic-addon1" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-user-alt"></i></span>
                     </div>
-                    <input type="text" class="form-control rounded-0" placeholder="Your Username" name="username" aria-label="username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control rounded-0" placeholder="Your Username" name="username" aria-label="username" aria-describedby="basic-addon1" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="text" class="form-control rounded-0" placeholder="Your Password" name="password" aria-label="password" aria-describedby="basic-addon1">
+                    <input type="password" class="form-control rounded-0" placeholder="Your Password" name="password" aria-label="password" aria-describedby="basic-addon1" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="text" class="form-control rounded-0" placeholder="Confirm Password" name="cpassword" aria-label="cpassword" aria-describedby="basic-addon1">
+                    <input type="password" class="form-control rounded-0" placeholder="Confirm Password" name="cpassword" aria-label="cpassword" aria-describedby="basic-addon1" required>
                 </div>
 
 
@@ -56,11 +59,52 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-mobile"></i></span>
                     </div>
-                    <input type="number" class="form-control rounded-0" placeholder="Your Mobile Number" name="mobile" aria-label="mobile" aria-describedby="basic-addon1">
+                    <input type="number" class="form-control rounded-0" placeholder="Your Mobile Number" name="mobile" aria-label="mobile" aria-describedby="basic-addon1" required>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block">Register Now</button>
+                <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block my-2">Register Now</button>
             </form>
+          
+
+            <?php
+                if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $username = htmlentities(mysqli_real_escape_string($conn, $_POST['username']));
+                    $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
+                    $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
+                    $cpassword = htmlentities(mysqli_real_escape_string($conn, $_POST['cpassword']));
+                    $mobile = htmlentities(mysqli_real_escape_string($conn, $_POST['mobile']));
+
+                    
+                    $pass = password_hash($password, PASSWORD_BCRYPT);
+                    $cpass = password_hash($cpassword, PASSWORD_BCRYPT);
+                    $token = bin2hex(random_bytes(15));
+
+                    $check_email = "SELECT * FROM `users` WHERE `email` = '$email'";
+                    $run_check = mysqli_query($conn, $check_email);
+                    $count = mysqli_num_rows($run_check);
+                    if($count > 0){
+                        echo "<small class='text-danger'>Email Already exists</small>";
+                    }
+                    else{
+
+                        if($password === $cpassword){
+                            $insert = "INSERT INTO `users` (`username`, `email`, `password`, `mobile`, `token`, `status`) VALUES ('$username', '$email', '$pass', '$mobile', '$token', 'inactive')";
+                            $run_insert = mysqli_query($conn, $insert);
+                            if($run_insert){
+                                header("Location: login.php");
+                            }
+                            else{
+                                echo "Due to --> ".mysqli_error($conn);
+                            }
+
+                        }
+                        else{
+                            echo "<small class='text-danger'>Password doesn't matches</small>";
+                        }
+                    }
+                }
+            ?>
+            <p class="text-center">Already have an account? <a href="login.php">Login</a></p>
         </div>
     </div>
 
