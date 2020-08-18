@@ -1,5 +1,5 @@
 <?php
-    include "db_connection.php";
+include "db_connection.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -64,45 +64,53 @@
 
                 <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block my-2">Register Now</button>
             </form>
-          
+
 
             <?php
-                if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
-                    $username = htmlentities(mysqli_real_escape_string($conn, $_POST['username']));
-                    $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
-                    $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
-                    $cpassword = htmlentities(mysqli_real_escape_string($conn, $_POST['cpassword']));
-                    $mobile = htmlentities(mysqli_real_escape_string($conn, $_POST['mobile']));
+            if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+                $username = htmlentities(mysqli_real_escape_string($conn, $_POST['username']));
+                $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
+                $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
+                $cpassword = htmlentities(mysqli_real_escape_string($conn, $_POST['cpassword']));
+                $mobile = htmlentities(mysqli_real_escape_string($conn, $_POST['mobile']));
 
-                    
-                    $pass = password_hash($password, PASSWORD_BCRYPT);
-                    $cpass = password_hash($cpassword, PASSWORD_BCRYPT);
-                    $token = bin2hex(random_bytes(15));
 
-                    $check_email = "SELECT * FROM `users` WHERE `email` = '$email'";
-                    $run_check = mysqli_query($conn, $check_email);
-                    $count = mysqli_num_rows($run_check);
-                    if($count > 0){
-                        echo "<small class='text-danger'>Email Already exists</small>";
-                    }
-                    else{
+                $pass = password_hash($password, PASSWORD_BCRYPT);
+                $cpass = password_hash($cpassword, PASSWORD_BCRYPT);
+                $token = bin2hex(random_bytes(15));
 
-                        if($password === $cpassword){
-                            $insert = "INSERT INTO `users` (`username`, `email`, `password`, `mobile`, `token`, `status`) VALUES ('$username', '$email', '$pass', '$mobile', '$token', 'inactive')";
-                            $run_insert = mysqli_query($conn, $insert);
-                            if($run_insert){
+                $check_email = "SELECT * FROM `users` WHERE `email` = '$email'";
+                $run_check = mysqli_query($conn, $check_email);
+                $count = mysqli_num_rows($run_check);
+                if ($count > 0) {
+                    echo "<small class='text-danger'>Email Already exists</small>";
+                } else {
+
+                    if ($password === $cpassword) {
+                        $insert = "INSERT INTO `users` (`username`, `email`, `password`, `mobile`, `token`, `status`) VALUES ('$username', '$email', '$pass', '$mobile', '$token', 'inactive')";
+                        $run_insert = mysqli_query($conn, $insert);
+                        if ($run_insert) {
+                            // Sending email to user
+                            $to_email = "$email";
+                            $subject = "Account Confirmation";
+                            $body = "Hi, $username. Please click the link to login http://localhost/EmailVerification/active.php?token=$token";
+                            $headers = "From: rizwan.ahmed0343@gmail.com";
+
+                            if (mail($to_email, $subject, $body, $headers)) {
+                                $_SESSION['msg'] = "Please check your email to verify your account";
                                 header("Location: login.php");
-                            }
-                            else{
-                                echo "Due to --> ".mysqli_error($conn);
-                            }
 
+                            } else {
+                                echo "<small class='text-danger'>Email sending failed...</small>";
+                            }
+                        } else {
+                            echo "Due to --> " . mysqli_error($conn);
                         }
-                        else{
-                            echo "<small class='text-danger'>Password doesn't matches</small>";
-                        }
+                    } else {
+                        echo "<small class='text-danger'>Password doesn't matches</small>";
                     }
                 }
+            }
             ?>
             <p class="text-center">Already have an account? <a href="login.php">Login</a></p>
         </div>
