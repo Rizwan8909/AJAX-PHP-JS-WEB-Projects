@@ -67,6 +67,7 @@ session_start();
                 if ($count == 1) {
                     $row = mysqli_fetch_assoc($run_check);
                     $email = $row['email'];
+                    $_SESSION['username'] = $row['username'];
                     $pass_db = $row['password'];
                     $pass_decode = password_verify($password, $pass_db);
 
