@@ -13,7 +13,7 @@ session_start();
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <title>Hello, world!</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -26,7 +26,13 @@ session_start();
             <button class="btn btn-primary rounded-0 btn-block font-weight-bold">Login with Facebook</button>
             <hr>
 
-            <p class="text-success"><?php echo $_SESSION['msg'];?></p>
+            <?php
+            if (isset($_SESSION['msg'])) {
+                echo "<p class='text-success'>" . $_SESSION['msg'] . "</p>";
+            } else {
+                echo "";
+            }
+            ?>
 
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div class="input-group mb-3">
@@ -49,51 +55,36 @@ session_start();
 
 
             <?php
-            // if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-            //     $username = htmlentities(mysqli_real_escape_string($conn, $_POST['username']));
-            //     $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
-            //     $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
-            //     $cpassword = htmlentities(mysqli_real_escape_string($conn, $_POST['cpassword']));
-            //     $mobile = htmlentities(mysqli_real_escape_string($conn, $_POST['mobile']));
+            if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
+                $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
+                $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
 
-            //     $pass = password_hash($password, PASSWORD_BCRYPT);
-            //     $cpass = password_hash($cpassword, PASSWORD_BCRYPT);
-            //     $token = bin2hex(random_bytes(15));
+                $check_email = "SELECT * FROM `users` WHERE `email` = '$email'";
+                $run_check = mysqli_query($conn, $check_email);
+                $count = mysqli_num_rows($run_check);
 
-            //     $check_email = "SELECT * FROM `users` WHERE `email` = '$email'";
-            //     $run_check = mysqli_query($conn, $check_email);
-            //     $count = mysqli_num_rows($run_check);
-            //     if ($count > 0) {
-            //         echo "<small class='text-danger'>Email Already exists</small>";
-            //     } else {
+                if ($count == 1) {
+                    $row = mysqli_fetch_assoc($run_check);
+                    $email = $row['email'];
+                    $pass_db = $row['password'];
+                    $pass_decode = password_verify($password, $pass_db);
 
-            //         if ($password === $cpassword) {
-            //             $insert = "INSERT INTO `users` (`username`, `email`, `password`, `mobile`, `token`, `status`) VALUES ('$username', '$email', '$pass', '$mobile', '$token', 'inactive')";
-            //             $run_insert = mysqli_query($conn, $insert);
-            //             if ($run_insert) {
-            //                 // Sending email to user
-            //                 $to_email = "$email";
-            //                 $subject = "Account Confirmation";
-            //                 $body = "Hi, $username. Please click the link to login http://localhost/EmailVerification/active.php?token=$token";
-            //                 $headers = "From: rizwan.ahmed0343@gmail.com";
+                    if ($pass_decode) {
+                        $login = "SELECT * FROM `users` WHERE `email` = '$email' AND `password`='$pass_decode' AND `status`='active'";
+                        $run_login = mysqli_query($conn, $login);
 
-            //                 if (mail($to_email, $subject, $body, $headers)) {
-            //                     $_SESSION['msg'] = "Please check your email to verify your account";
-            //                     header("Location: login.php");
-
-            //                 } else {
-            //                     echo "<small class='text-danger'>Email sending failed...</small>";
-            //                 }
-            //             } else {
-            //                 echo "Due to --> " . mysqli_error($conn);
-            //             }
-            //         } else {
-            //             echo "<small class='text-danger'>Password doesn't matches</small>";
-            //         }
-            //     }
-            // }
-            // ?>
+                        if($run_login){
+                            echo "<script>location.replace('home.php')</script>";
+                        }
+                    } else {
+                        echo "<small class='text-danger'>Incorrect Password</small>";
+                    }
+                } else {
+                    echo "<small class='text-danger'>Invalid Email</small>";
+                }
+            }
+            ?>
             <p class="text-center">Don't have an account? <a href="register.php">Sign Up</a></p>
         </div>
     </div>
