@@ -39,7 +39,11 @@ session_start();
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control rounded-0" placeholder="Your Email" name="email" aria-label="email" aria-describedby="basic-addon1" required>
+                    <!-- Email cookie in value if set -->
+                    <input type="email" class="form-control rounded-0" placeholder="Your Email" name="email" 
+                        aria-label="email" aria-describedby="basic-addon1" 
+                        value="<?php if(isset($_COOKIE['emailcookie'])){ echo $_COOKIE['emailcookie']; }?>"
+                        required>
                 </div>
 
 
@@ -47,7 +51,10 @@ session_start();
                     <div class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control rounded-0" placeholder="Your Password" name="password" aria-label="password" aria-describedby="basic-addon1" required>
+                    <input type="password" class="form-control rounded-0" placeholder="Your Password" name="password" 
+                        aria-label="password" aria-describedby="basic-addon1" 
+                        value="<?php if(isset($_COOKIE['passcookie'])){ echo $_COOKIE['passcookie']; }?>"
+                        required>
                 </div>
 
 
@@ -86,6 +93,9 @@ session_start();
 
                             // Setting cookies for id password
                             if(isset($_POST['rememberme'])){
+
+                                setcookie('emailcookie', $email, time()+ 2592000);
+                                setcookie('passcookie', $password, time()+ 2592000);
                                 echo "<script>location.replace('home.php')</script>";
                             }
                             else{
