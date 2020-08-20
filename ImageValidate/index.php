@@ -1,5 +1,5 @@
 <?php
-// include "db_connection.php";
+include "db_connection.php";
 // session_start();
 ?>
 <!doctype html>
@@ -17,30 +17,45 @@
 </head>
 
 <body>
+
+
     <div class="container-fluid mx-auto">
         <div class="container my-5 " style="width: 27rem;">
-
-            <h4 class="text-center">Image Validation</h4>
-            <p class="text-center">It will allow only png, jpg, jpeg</p>
-
-            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
-
-  
-                <input type="email" class="form-control rounded-0 my-4" placeholder="Name" name="name" required>
-                <input type="file" class="form-control rounded-0 my-4 p-1" name="image" required>
-                <small class="text-danger">*Invalid image format</small>
-                <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block my-2">Submit</button>
-            </form>
-
 
             <?php
             if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-                $email = htmlentities(mysqli_real_escape_string($conn, $_POST['email']));
-                $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
+                $name = htmlentities(mysqli_real_escape_string($conn, $_POST['name']));
+                $image = $_FILES['img'];
+
+                $file_name = $image['name'];
+                $file_path = $image['tmp_name'];
+                $fileerror = $image['error'];
+
+                if ($fileerror == 0) {
+                    $dest_file = 'images/' . $file_name;
+                    move_uploaded_file($file_path, $dest_file);
+
+                    $insert = "INSERT INTO `img_validate` (`name`, `image`) VALUES ('$name', '$dest_file')";
+                    $run = mysqli_query($conn, $insert);
+
+                    if ($run) {
+                        echo "<h5 class='text-success text-center'>Successfully inserted</h5>";
+                    }
+                }
             }
             ?>
-            <p class="text-center">Don't have an account? <a href="register.php">Sign Up</a></p>
+            <h4 class="text-center">Image Validation</h4>
+            <p class="text-center">It will allow only png, jpg, jpeg</p>
+
+            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+
+
+                <input type="text" class="form-control rounded-0 my-4" placeholder="Name" name="name" required>
+                <input type="file" class="form-control rounded-0 my-4 p-1" name="img" required>
+                <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block my-2">Submit</button>
+            </form>
+
         </div>
     </div>
 
