@@ -1,5 +1,3 @@
-let lang = document.getElementById('langs');
-lang.addEventListener('click', mylang(this.value));
 
 function mylang(data){
     xhr = new XMLHttpRequest();
@@ -8,7 +6,7 @@ function mylang(data){
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            document.getElementById('frameworks')
+           document.getElementById('frameworks').innerHTML = xhr.responseText;
         }
     }
 }

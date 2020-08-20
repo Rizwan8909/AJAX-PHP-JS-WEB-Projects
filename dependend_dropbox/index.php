@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Dependend Dropbox</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="lang">Languages</label>
                 </div>
-                <select class="custom-select" id="langs" data-toggle="tooltip">
+                <select class="custom-select" id="langs" data-toggle="tooltip" onchange="mylang(this.value)">
                     <option selected disabled>Select Languange..</option>
                     <option>PHP</option>
                     <option>JavaScript</option>
