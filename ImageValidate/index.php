@@ -23,6 +23,8 @@ include "db_connection.php";
         <div class="container my-5 " style="width: 27rem;">
 
             <?php
+            $error = false;
+            $error_msg = '';
             if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $name = htmlentities(mysqli_real_escape_string($conn, $_POST['name']));
@@ -32,15 +34,36 @@ include "db_connection.php";
                 $file_path = $image['tmp_name'];
                 $fileerror = $image['error'];
 
+                // From here validation work is started
+
+                // Explode function will break the name into two when it will find '.' [it will seperate extension from the name] {will convert it into array after it will find '.'}
+                $break = explode('.', $file_name);
+
+                // It will check the exension by checking the last item of the array that is created on top and convert string into lower case
+                $extension_check = strtolower(end($break));
+
+                // Following are the array of valid extensions
+                $valid_extensions = array('png', 'jpg', 'jpeg');
+
+
+
+
                 if ($fileerror == 0) {
-                    $dest_file = 'images/' . $file_name;
-                    move_uploaded_file($file_path, $dest_file);
+                    // Now checking wether the inserted file has valid extension or not
+                    if (in_array($extension_check, $valid_extensions)) {
+                        $dest_file = 'images/' . $file_name;
+                        move_uploaded_file($file_path, $dest_file);
 
-                    $insert = "INSERT INTO `img_validate` (`name`, `image`) VALUES ('$name', '$dest_file')";
-                    $run = mysqli_query($conn, $insert);
+                        $insert = "INSERT INTO `img_validate` (`name`, `image`) VALUES ('$name', '$dest_file')";
+                        $run = mysqli_query($conn, $insert);
 
-                    if ($run) {
-                        echo "<h5 class='text-success text-center'>Successfully inserted</h5>";
+                        if ($run) {
+                            echo "<h5 class='text-success text-center'>Successfully inserted</h5>";
+                        }
+                    }
+                    else{
+                        $error = true;
+                        $error_msg = "<small class='text-danger'>*Invalid image (only jpg, png , jpeg are allowed)</small>";
                     }
                 }
             }
@@ -53,6 +76,11 @@ include "db_connection.php";
 
                 <input type="text" class="form-control rounded-0 my-4" placeholder="Name" name="name" required>
                 <input type="file" class="form-control rounded-0 my-4 p-1" name="img" required>
+                <?php
+                    if($error){
+                        echo $error_msg;
+                    }
+                ?>
                 <button type="submit" name="submit" class="btn btn-success rounded-0 btn-block my-2">Submit</button>
             </form>
 
