@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="studentList"></ul>
+</body>
+
+<script>
+    console.log("Welcome to Callback practice");
+    const students = [
+        { name: "Rizwan", subject: "Javascript" },
+        { name: "Rehan", subject: "Business" }
+    ];
+
+    // function enrollStudents(student) {
+    //     setTimeout(function () {
+    //         students.push(student);
+    //         console.log(students);
+    //         console.log("Students enrolled");
+    //     }, 2000);
+    // }
+
+    function enrollStudents(student, callback){
+        setTimeout(function() {
+            students.push(student);
+            callback();
+        }, 2000);
+    }
+
+
+
+    function getStudents(){
+        setTimeout(() => {
+            let str= "";
+            students.forEach(function(stundent){
+                str+= `<li>${students.Text}</li>`
+            });    
+            document.getElementById("studentList").innerHTML = str;
+        }, 1000);
+    }
+
+
+
+    // function getStudents() {
+    //     setTimeout(function () {
+    //         let str = "";
+    //         students.forEach(function (student) {
+    //             str += `<li> ${students.s}</li>`;
+    //         });
+    //         document.getElementById("studentList").innerHTML = str;
+    //     }, 1000);
+    // }
+
+   const newStudent = { name: "Kainat", subject: "Bio" };
+    enrollStudents(newStudent, getStudents);
+    // getStudents();
+</script>
+
+</html>
